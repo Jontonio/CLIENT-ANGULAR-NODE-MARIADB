@@ -1,0 +1,45 @@
+<div>
+    <h2 *ngIf="!update"><b>Registro de usuario</b></h2>
+    <h2 *ngIf="update"><b>Actualizar usuario</b></h2>
+    <form [formGroup]="formRegistro" class="example-form">
+
+        <div class="mb-1">
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Nombre</mat-label>
+                <input type="text" matInput autocomplete="off" formControlName="nombre">
+                <mat-error *ngIf="nombre.hasError('required')">
+                    Este campo es <b>requerido</b>
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="m-1">
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-label>Correo</mat-label>
+              <input type="email" matInput autocomplete="off" formControlName="email">
+              <mat-error *ngIf="email.hasError('required')">
+                  Este campo es <b>requerido</b>
+              </mat-error>
+              <mat-error *ngIf="!email.hasError('required') && 
+                                 email.hasError('email')">
+                Digite un <b>email</b> válido
+              </mat-error>
+            </mat-form-field>
+        </div>
+        
+        <div class="m-1">
+            <button type="button" (click)="guardar()"
+                                  *ngIf="!update"
+                                  mat-raised-button color="primary"><i class="fas fa-save"></i> Guardar
+            </button>
+            <button type="button" (click)="actualizar()"
+                                   *ngIf="update"
+                                   mat-raised-button color="primary"><i class="fas fa-pen"></i> Actualizar
+            </button>
+            <button type="reset"  mat-raised-button color="primary" 
+                                  (click)="cancelarUpdate()"
+                                  class="m-2">Cancelar</button>
+        </div>
+
+    </form>    
+</div>
